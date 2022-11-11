@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/10 14:46:26 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:39:53 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ typedef struct s_data
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
 } t_data;
+
+//philo.c
+int	ft_error(char *str, t_data *data);
+void	ft_exit(t_data *data);
+void	clear_data(t_data *data);
+
+//init.c
+int	init(t_data *data, char **argv, int argc);
 
 //utils.c
 long	ft_atoi(const char *str);
