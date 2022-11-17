@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:39:12 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/10 12:39:33 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:27:29 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,33 @@ long	ft_atoi(const char *str)
 		str++;
 	}
 	return (result * sign);
+}
+
+u_int64_t	get_time(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+		return (ft_error("gettimeofday() FAILURE\n", NULL));
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
+}
+
+int	ft_usleep(useconds_t time)
+{
+	u_int64_t	start;
+	
+	start = get_time();
+	while ((get_time() - start) < time)
+		ft_usleep(time / 10);
+	return (0);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 != '\0' && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(char *)s1 - *(char *)s2);
 }

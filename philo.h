@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/11 16:39:53 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:36:32 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <sys/time.h>
+
+# define TAKE_FORKS "has taken a fork"
+# define THINKING "is thinking"
+# define EATING "is eating"
+# define SLEEPING "is sleeping"
+# define DIED "died"
 
 typedef struct s_philo
 {
@@ -52,14 +58,17 @@ typedef struct s_data
 } t_data;
 
 //philo.c
-int	ft_error(char *str, t_data *data);
-void	ft_exit(t_data *data);
-void	clear_data(t_data *data);
+int			ft_error(char *str, t_data *data);
+void		ft_exit(t_data *data);
+void		clear_data(t_data *data);
 
 //init.c
-int	init(t_data *data, char **argv, int argc);
+int			init(t_data *data, char **argv, int argc);
 
 //utils.c
-long	ft_atoi(const char *str);
+long		ft_atoi(const char *str);
+int			ft_usleep(useconds_t time);
+u_int64_t	get_time(void);
+int			ft_strcmp(char *s1, char *s2);
 
 #endif

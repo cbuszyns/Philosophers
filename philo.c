@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:19:32 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/11 16:47:36 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:09:02 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	input_check(char **argv)
 				j++;
 				continue;
 			}
-			if ((argv[i][j] < 48 || argv[i][j] >57))
+			if ((argv[i][j] < 48 || argv[i][j] > 57))
 				return(ft_error("invalid input", NULL));
 			j++;
 		}
