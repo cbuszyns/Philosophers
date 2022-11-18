@@ -19,6 +19,10 @@
 # include <stdlib.h>
 # include <sys/time.h>
 
+# define TID_ERR "Allocation Error: Thread ID"
+# define FORK_ERR "Allocation Error: Forks"
+# define PHILO_ERR "Allocation Error: Philos"
+
 # define TAKE_FORKS "has taken a fork"
 # define THINKING "is thinking"
 # define EATING "is eating"
@@ -33,7 +37,7 @@ typedef struct s_philo
 	int				eat_cont;
 	int				status;
 	int				eating;
-	uint64_t		time_to_die;
+	u_int64_t		time_to_die;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
