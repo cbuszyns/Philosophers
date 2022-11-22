@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:32:02 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/11 16:38:29 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:43:14 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	alloc(t_data *data)
 {
 	data->tid = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->tid)
-		return (ft_error("Allocation Error: Thread ID", data));
+		return (ft_error(ALLOC_ERR1, data));
 	data->forks = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->forks)
-		return (ft_error("Allocation Error: Forks", data));
+		return (ft_error(ALLOC_ERR3, data));
 	data->philos = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->philos)
-		return (ft_error("Allocation Error: Philos", data));
+		return (ft_error(ALLOC_ERR2, data));
 	return (0);
 }
 

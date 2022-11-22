@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/17 12:36:32 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:06:19 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 # define EATING "is eating"
 # define SLEEPING "is sleeping"
 # define DIED "died"
+
+# define ALLOC_ERR1 "Allocation Error: Thread Id's"
+# define ALLOC_ERR2 "Allocation Error: Philos"
+# define ALLOC_ERR3 "Allocation Error: Forks"
+
+# define TH_ERR "Error: Creating Threads"
+# define JOIN_ERR "Error: Joining Threads"
+# define INIT_ERR "Error: Init Forks"
+
 
 typedef struct s_philo
 {
@@ -70,5 +79,10 @@ long		ft_atoi(const char *str);
 int			ft_usleep(useconds_t time);
 u_int64_t	get_time(void);
 int			ft_strcmp(char *s1, char *s2);
+
+//actions.c
+void		eat(t_philo *philo);
+void		message(char *str, t_philo *philo);
+
 
 #endif
