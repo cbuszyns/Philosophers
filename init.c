@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:32:02 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/22 14:43:14 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/22 15:09:58 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	alloc(t_data *data)
 {
 	data->tid = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->tid)
-		return (ft_error(ALLOC_ERR1, data));
+		return (ft_error(TID_ERR, data));
 	data->forks = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->forks)
-		return (ft_error(ALLOC_ERR3, data));
+		return (ft_error(FORK_ERR, data));
 	data->philos = malloc(sizeof(pthread_t) * data->num_philo);
 	if (!data->philos)
-		return (ft_error(ALLOC_ERR2, data));
+		return (ft_error(PHILO_ERR, data));
 	return (0);
 }
 
@@ -69,7 +69,7 @@ int	init_data(t_data *data, char **argv, int argc)
 	data->num_philo = (int) ft_atoi(argv[1]);
 	data->death_time = (u_int64_t) ft_atoi(argv[2]);
 	data->eat_time = (u_int64_t) ft_atoi(argv[3]);
-	data->sleep_time = (uint64_t) ft_atoi(argv[4]);
+	data->sleep_time = (u_int64_t) ft_atoi(argv[4]);
 	if (argc == 6)
 		data->num_meals = (int) ft_atoi(argv[5]);
 	else
