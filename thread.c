@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:48:01 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/22 15:07:48 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:47:22 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,42 @@
 
 void	*supervisor(void *philo_pointer)
 {
+	t_philo *philo;
 
+	philo = (t_philo *) philo_pointer;
+	while (philo->data->dead)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (get_time() >= philo->time_to_die && philo->eating == 0)
+			message(DIED, philo);
+		if (philo->eat_cont == philo->data->num_meals)
+		{
+			pthread_mutex_lock(&philo->data->lock);
+			philo->data->finished++;
+			philo->eat_cont++;
+			pthread_mutex_unlock(&philo->data->lock);
+		}
+		pthread_mutex_unlock(&philo->lock);
+	}
+	return ((void *)0);
 }
 
 void	*monitor(void *data_pointer)
 {
+	t_philo *philo;
 
+	philo = (t_philo *) data_pointer;
+	pthread_mutex_lock(&philo->data->write);
+	printf("data val: %d", philo->data->dead);
+	pthread_mutex_unlock(&philo->data->write);
+	while (philo->data->dead == 0)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (philo->data->finished >= philo->data->num_philo)
+			philo->data->dead = 1;
+		pthread_mutex_unlock(&philo->lock);
+	}
+	return((void *)0);
 }
 
 void	*routine(void *philo_pointer)
@@ -54,7 +84,7 @@ int	thread_init(t_data *data)
 	}
 	while (++i < data->num_philo)
 	{
-		if(pthread_create(data->tid[i], NULL, &routine, &data->philos[i]))
+		if(pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (ft_error(TH_ERR, data));
 		ft_usleep(1);
 	}
@@ -65,4 +95,13 @@ int	thread_init(t_data *data)
 			return (ft_error(JOIN_ERR, data));
 	}
 	return (0);
+}
+
+u_int64_t	get_time(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL))
+		return (ft_error("gettimeofday() FAILURE\n", NULL));
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }

@@ -6,34 +6,21 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:19:32 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/17 12:09:02 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:46:15 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	input_check(char **argv)
+int	one_philo(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j])
-			{
-				j++;
-				continue;
-			}
-			if ((argv[i][j] < 48 || argv[i][j] > 57))
-				return(ft_error("invalid input", NULL));
-			j++;
-		}
-		i++;
-	}
+	data->start_time = get_time();
+	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos))
+		return (ft_error(TH_ERR, data));
+	pthread_detach(data->tid[0]);
+	while (data->dead == 0)
+		ft_usleep(0);
+	ft_exit(data);
 	return (0);
 }
 
@@ -80,4 +67,10 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init(&data, argv, argc))
 		return (1);
+	if (data.num_philo == 1)
+		return (one_philo(&data));
+	if(thread_init(&data))
+		return (1);
+	ft_exit(&data);
+	return (0);
 }

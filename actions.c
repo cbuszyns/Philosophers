@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:23:18 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/17 12:48:34 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:47:04 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	message(char *str, t_philo *philo)
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	message(TAKE_FORKS, &philo);
+	message(TAKE_FORKS, philo);
 	pthread_mutex_lock(philo->l_fork);
-	message(TAKE_FORKS, &philo);
+	message(TAKE_FORKS, philo);
 }
 
 void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	message(SLEEPING, &philo);
+	message(SLEEPING, philo);
 	ft_usleep(philo->data->sleep_time);
 }
 

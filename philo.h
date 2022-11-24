@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/22 15:06:19 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:35:02 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,16 @@ int			init(t_data *data, char **argv, int argc);
 //utils.c
 long		ft_atoi(const char *str);
 int			ft_usleep(useconds_t time);
-u_int64_t	get_time(void);
 int			ft_strcmp(char *s1, char *s2);
+int			input_check(char **argv);
 
 //actions.c
 void		eat(t_philo *philo);
 void		message(char *str, t_philo *philo);
 
+//thread.c
+u_int64_t	get_time(void);
+int			thread_init(t_data *data);
+void		*routine(void *philo_pointer);
 
 #endif
