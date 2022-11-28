@@ -82,7 +82,7 @@ int			init(t_data *data, char **argv, int argc);
 
 //utils.c
 long		ft_atoi(const char *str);
-int			ft_usleep(useconds_t time);
+int			ft_usleep(u_int64_t time);
 int			ft_strcmp(char *s1, char *s2);
 int			input_check(char **argv);
 

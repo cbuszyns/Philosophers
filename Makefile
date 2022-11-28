@@ -7,7 +7,7 @@ OBJ			=	$(SRC:.c=.o)
 CC			=	gcc 
 
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-pthread
 
 %.o:%.c
 			$(CC) $(CFLAGS) -c $< -o $@

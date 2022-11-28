@@ -47,7 +47,7 @@ long	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int	ft_usleep(useconds_t time)
+int	ft_usleep(u_int64_t time)
 {
 	u_int64_t	start;
 

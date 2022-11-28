@@ -66,19 +66,18 @@ void	*routine(void *philo_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *) philo_pointer;
+	printf("dio");
 	philo->time_to_die = philo->data->death_time + get_time();
+	printf("cane");
 	if (pthread_create(&philo->t1, NULL, &supervisor, (void *)philo))
 		return ((void *)1);
-	printf("tread created routine\n");
 	while (philo->data->dead == 0)
 	{
 		eat(philo);
 		message(THINKING, philo);
 	}
-	printf("why are u breaking\n");
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
-	printf("in theory u should work\n");
 	return ((void *)0);
 }
 
@@ -99,7 +98,6 @@ int	thread_init(t_data *data)
 		if(pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (ft_error(TH_ERR, data));
 		ft_usleep(1);
-		printf("why?\n");
 	}
 	i = -1;
 	while (++i < data->num_philo)
