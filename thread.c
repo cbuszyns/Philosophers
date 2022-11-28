@@ -6,32 +6,19 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:48:01 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/24 16:47:22 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:39:03 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*supervisor(void *philo_pointer)
+u_int64_t	get_time(void)
 {
-	t_philo *philo;
+	struct timeval	tv;
 
-	philo = (t_philo *) philo_pointer;
-	while (philo->data->dead)
-	{
-		pthread_mutex_lock(&philo->lock);
-		if (get_time() >= philo->time_to_die && philo->eating == 0)
-			message(DIED, philo);
-		if (philo->eat_cont == philo->data->num_meals)
-		{
-			pthread_mutex_lock(&philo->data->lock);
-			philo->data->finished++;
-			philo->eat_cont++;
-			pthread_mutex_unlock(&philo->data->lock);
-		}
-		pthread_mutex_unlock(&philo->lock);
-	}
-	return ((void *)0);
+	if (gettimeofday(&tv, NULL))
+		return (ft_error("gettimeofday() FAILURE\n", NULL));
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }
 
 void	*monitor(void *data_pointer)
@@ -52,21 +39,46 @@ void	*monitor(void *data_pointer)
 	return((void *)0);
 }
 
-void	*routine(void *philo_pointer)
+void	*supervisor(void *philo_pointer)
 {
 	t_philo *philo;
+
+	philo = (t_philo *) philo_pointer;
+	while (philo->data->dead == 0)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (get_time() >= philo->time_to_die && philo->eating == 0)
+			message(DIED, philo);
+		if (philo->eat_cont == philo->data->num_meals)
+		{
+			pthread_mutex_lock(&philo->data->lock);
+			philo->data->finished++;
+			philo->eat_cont++;
+			pthread_mutex_unlock(&philo->data->lock);
+		}
+		pthread_mutex_unlock(&philo->lock);
+	}
+	return ((void *)0);
+}
+
+void	*routine(void *philo_pointer)
+{
+	t_philo	*philo;
 
 	philo = (t_philo *) philo_pointer;
 	philo->time_to_die = philo->data->death_time + get_time();
 	if (pthread_create(&philo->t1, NULL, &supervisor, (void *)philo))
 		return ((void *)1);
+	printf("tread created routine\n");
 	while (philo->data->dead == 0)
 	{
 		eat(philo);
 		message(THINKING, philo);
 	}
+	printf("why are u breaking\n");
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
+	printf("in theory u should work\n");
 	return ((void *)0);
 }
 
@@ -87,6 +99,7 @@ int	thread_init(t_data *data)
 		if(pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (ft_error(TH_ERR, data));
 		ft_usleep(1);
+		printf("why?\n");
 	}
 	i = -1;
 	while (++i < data->num_philo)
@@ -95,13 +108,4 @@ int	thread_init(t_data *data)
 			return (ft_error(JOIN_ERR, data));
 	}
 	return (0);
-}
-
-u_int64_t	get_time(void)
-{
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL))
-		return (ft_error("gettimeofday() FAILURE\n", NULL));
-	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }

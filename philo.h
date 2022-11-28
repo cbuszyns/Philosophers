@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/24 16:35:02 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:30:52 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <sys/time.h>
+
+# define ERR_IN_2 "Invalid input values"
 
 # define TID_ERR "Allocation Error: Thread ID"
 # define FORK_ERR "Allocation Error: Forks"

@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:39:12 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/24 16:31:36 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:53:35 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ long	ft_atoi(const char *str)
 int	ft_usleep(useconds_t time)
 {
 	u_int64_t	start;
-	
+
 	start = get_time();
 	while ((get_time() - start) < time)
-		ft_usleep(time / 10);
+		usleep(time / 10);
 	return (0);
 }
 

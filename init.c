@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:32:02 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/22 15:09:58 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:32:10 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ int	init_data(t_data *data, char **argv, int argc)
 		data->num_meals = (int) ft_atoi(argv[5]);
 	else
 		data->num_meals = -1;
-	if (data->num_philo <= 0 || data->num_philo > 200 || data->death_time < 0 || data->eat_time < 0 || data->sleep_time < 0)
-		return (-1);
+	if (data->num_philo <= 0 || data->num_philo > 200 || data->death_time < 0 ||
+			data->eat_time < 0 || data->sleep_time < 0)
+		return (ft_error(ERR_IN_2, NULL));
 	data->dead = 0;
 	data->finished = 0;
 	pthread_mutex_init(&data->write, NULL);

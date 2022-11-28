@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:19:32 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/24 16:46:15 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/28 11:42:00 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (data.num_philo == 1)
 		return (one_philo(&data));
-	if(thread_init(&data))
+	if (thread_init(&data))
 		return (1);
 	ft_exit(&data);
 	return (0);
