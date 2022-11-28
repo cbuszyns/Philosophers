@@ -39,6 +39,7 @@
 # define JOIN_ERR "Error: Joining Threads"
 # define INIT_ERR "Error: Init Forks"
 
+struct s_data;
 
 typedef struct s_philo
 {

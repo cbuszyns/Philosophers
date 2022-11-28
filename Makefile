@@ -1,4 +1,4 @@
-NAME		=	philo
+NAME		=	dio
 
 SRC			=	philo.c init.c utils.c actions.c thread.c
 

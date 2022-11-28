@@ -74,8 +74,8 @@ int	init_data(t_data *data, char **argv, int argc)
 		data->num_meals = (int) ft_atoi(argv[5]);
 	else
 		data->num_meals = -1;
-	if (data->num_philo <= 0 || data->num_philo > 200 || data->death_time < 0 ||
-			data->eat_time < 0 || data->sleep_time < 0)
+	if (data->num_philo <= 0 || data->num_philo > 200 || data->death_time < 0
+		|| data->eat_time < 0 || data->sleep_time < 0)
 		return (ft_error(ERR_IN_2, NULL));
 	data->dead = 0;
 	data->finished = 0;
