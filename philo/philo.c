@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:19:32 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/30 11:48:02 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:13:38 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	one_philo(t_data *data)
 		return (ft_error(TH_ERR, data));
 	pthread_detach(data->tid[0]);
 	while (data->dead == 0)
-		ft_usleep(0);
+		;
 	ft_exit(data);
 	return (0);
 }
