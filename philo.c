@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:19:32 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/28 11:42:00 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:48:02 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	one_philo(t_data *data)
 {
 	data->start_time = get_time();
-	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos))
+	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos[0]))
 		return (ft_error(TH_ERR, data));
 	pthread_detach(data->tid[0]);
 	while (data->dead == 0)

@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:39:12 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/28 12:53:35 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:45:50 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ long	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-int	ft_usleep(u_int64_t time)
+int	ft_usleep(useconds_t time)
 {
 	u_int64_t	start;
 
 	start = get_time();
 	while ((get_time() - start) < time)
-		usleep(time / 10);
+		usleep(time / 100);
 	return (0);
 }
 
@@ -81,10 +81,10 @@ int	input_check(char **argv)
 			if (argv[i][j])
 			{
 				j++;
-				continue;
+				continue ;
 			}
 			if ((argv[i][j] < 48 || argv[i][j] > 57))
-				return(ft_error("invalid input", NULL));
+				return (ft_error("invalid input", NULL));
 			j++;
 		}
 		i++;

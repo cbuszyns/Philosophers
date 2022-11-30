@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 14:48:01 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/28 12:39:03 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:47:26 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	*routine(void *philo_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *) philo_pointer;
-	printf("dio %p\n", philo);
 	philo->time_to_die = philo->data->death_time + get_time();
 	if (pthread_create(&philo->t1, NULL, &supervisor, (void *)philo))
 		return ((void *)1);
@@ -77,7 +76,6 @@ void	*routine(void *philo_pointer)
 	}
 	if (pthread_join(philo->t1, NULL))
 		return ((void *)1);
-	
 	return ((void *)0);
 }
 
@@ -87,7 +85,7 @@ int	thread_init(t_data *data)
 	pthread_t	t0;
 
 	i = -1;
- 	data->start_time = get_time();
+	data->start_time = get_time();
 	if (data->num_meals > 0)
 	{
 		if (pthread_create(&t0, NULL, &monitor, &data->philos[0]))
@@ -95,10 +93,9 @@ int	thread_init(t_data *data)
 	}
 	while (++i < data->num_philo)
 	{
-	printf("init %p\n", &data->philos[i]);
-		if(pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
+		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (ft_error(TH_ERR, data));
-		ft_usleep(1); 
+		ft_usleep(1);
 	}
 	i = -1;
 	while (++i < data->num_philo)

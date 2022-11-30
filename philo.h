@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:17:43 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/28 12:30:52 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:15:56 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,15 @@
 # define SLEEPING "is sleeping"
 # define DIED "died"
 
-# define ALLOC_ERR1 "Allocation Error: Thread Id's"
-# define ALLOC_ERR2 "Allocation Error: Philos"
-# define ALLOC_ERR3 "Allocation Error: Forks"
-
 # define TH_ERR "Error: Creating Threads"
 # define JOIN_ERR "Error: Joining Threads"
 # define INIT_ERR "Error: Init Forks"
 
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
-    struct s_data	*data;
+	struct s_data	*data;
 	pthread_t		t1;
 	int				id;
 	int				eat_cont;
@@ -53,16 +49,15 @@ typedef struct s_philo
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-} t_philo;
-
+}	t_philo;
 
 typedef struct s_data
 {
 	pthread_t		*tid;
-    int 			num_philo;
-    int 			num_meals;
-    int 			dead;
-    int 			finished;
+	int				num_philo;
+	int				num_meals;
+	int				dead;
+	int				finished;
 	t_philo			*philos;
 	u_int64_t		death_time;
 	u_int64_t		eat_time;
@@ -71,27 +66,22 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
-} t_data;
+}	t_data;
 
-//philo.c
 int			ft_error(char *str, t_data *data);
 void		ft_exit(t_data *data);
 void		clear_data(t_data *data);
 
-//init.c
 int			init(t_data *data, char **argv, int argc);
 
-//utils.c
 long		ft_atoi(const char *str);
-int			ft_usleep(u_int64_t time);
+int			ft_usleep(useconds_t time);
 int			ft_strcmp(char *s1, char *s2);
 int			input_check(char **argv);
 
-//actions.c
 void		eat(t_philo *philo);
 void		message(char *str, t_philo *philo);
 
-//thread.c
 u_int64_t	get_time(void);
 int			thread_init(t_data *data);
 void		*routine(void *philo_pointer);

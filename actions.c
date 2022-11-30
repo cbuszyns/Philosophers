@@ -6,7 +6,7 @@
 /*   By: cbuszyns <cbuszyns@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:23:18 by cbuszyns          #+#    #+#             */
-/*   Updated: 2022/11/28 12:20:15 by cbuszyns         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:30:12 by cbuszyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	message(char *str, t_philo *philo)
 	time = get_time() - philo->data->start_time;
 	if (ft_strcmp(DIED, str) == 0 && philo->data->dead == 0)
 	{
-		printf("%lu %d %s\n", time, philo->id, str);
+		printf("%llu %d %s\n", time, philo->id, str);
 		philo->data->dead = 1;
 	}
 	if (!philo->data->dead)
-		printf("%lu %d %s\n", time, philo->id, str);
+		printf("%llu %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
 }
 

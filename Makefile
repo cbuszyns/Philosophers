@@ -1,4 +1,4 @@
-NAME		=	dio
+NAME		=	philo
 
 SRC			=	philo.c init.c utils.c actions.c thread.c
 
@@ -7,7 +7,7 @@ OBJ			=	$(SRC:.c=.o)
 CC			=	gcc 
 
 RM			=	rm -f
-CFLAGS		=	-pthread
+CFLAGS		=	-pthread -Wall -Werror -Wextra
 
 %.o:%.c
 			$(CC) $(CFLAGS) -c $< -o $@
